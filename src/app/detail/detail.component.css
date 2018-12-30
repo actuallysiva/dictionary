@@ -1,0 +1,22 @@
+.container {
+    background-color: rgb(211, 231, 243);
+    margin: 0;
+    height: 100%;
+  }
+  .jumbotron {
+      margin: 0%;
+  }
+.mt-6 {
+    margin-top: 5rem;
+  }
+  .btn-rounded {
+    -webkit-border-radius: 10em;
+    border-radius: 10em;
+  }
+  .bg-vio {
+    background-color: rgba(156, 39, 176, 0.3);
+    border-radius: 10px;
+  }
+  .collapse {
+    height: auto !important;
+  }

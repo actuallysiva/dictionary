@@ -1,0 +1,117 @@
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+  crossorigin="anonymous">
+
+<div class="container-fluid">
+  <div class="container">
+    <app-searchbar></app-searchbar>
+  </div>
+  <div class="jumbotron z-depth-3" *ngIf="fullData">
+    <p> Definition of
+      <span class="text-secondary font-weight-light font-italic">
+        {{ object.word }}</span> in English ({{ object.language }})
+    </p>
+    <h1 class="h1 text-primary text-capitalize"> {{ object.word }} </h1>
+    <p *ngIf="wordOrigin" class="lead font-weight-normal">
+      <strong>Origin : </strong>
+      <span class="text-muted">{{wordOrigin}}</span>
+    </p>
+    <hr class="my-1">
+    <div *ngFor="let lexicalEntry of byProduct">
+      <h4 class="blue-text h4-responsive">
+        <u>{{lexicalEntry.lexicalCategory}}</u> :
+      </h4>
+      <h6 class="font-weight-normal" *ngIf="lexicalEntry.pronunciations.length > 0">
+        Pronunciations :
+        <span *ngFor="let pronunciations of lexicalEntry.pronunciations">
+
+          <span> {{ pronunciations.phoneticSpelling }}
+            <audio #audio [src]="pronunciations.audioFile"></audio>
+            <a (click)=play(audio)>
+              <i class="fas fa-bullhorn" aria-hidden="true"></i>
+            </a>
+          </span>
+        </span>
+      </h6>
+      <p> Definitions :</p>
+      <span *ngFor="let sense of lexicalEntry.entries['0'].senses">
+        <p>
+          <i class="fas fa-caret-right indigo-text" aria-hidden="true"></i> 
+          {{ sense.definitions }} 
+        </p>
+      </span>
+      <button class="btn btn-outline-secondary btn-rounded btn-sm waves-light" type="button" (click)="test.toggle()"
+        (click)="show = !show">Examples
+        <i class="fa ml-1"  aria-hidden="true"></i>
+      </button>
+
+      <div class=" bg-vio p-2" [mdbCollapse]="isCollapsed" #test="bs-collapse">
+        <div *ngIf="lexicalEntry.entries['0'].senses">
+          <ul *ngFor="let senses of lexicalEntry.entries['0'].senses">
+            <li #eg *ngFor="let example of senses.examples"> {{ example.text }} </li>
+          </ul>
+        </div>
+
+      </div>
+      <hr class="dropdown-divider m-2">
+
+    </div>
+    <div class="card  pink darken-1 z-depth-2" *ngIf="forms.length > 0">
+      <div class="card-body">
+        <span class="white-text mb-0">
+          <span>Variant Forms : {{ forms }}</span>
+        </span>
+      </div>
+    </div>
+    <div class="card  pink darken-1 z-depth-2 mt-2" *ngIf="notes.length > 0">
+      <div class="card-body">
+        <span class="white-text mb-0">
+          <span>Notes : </span>
+          <ul class="list-group">
+            <li class="list-group-item black-text" *ngFor="let note of notes">
+              <span class=" font-weight-bold blue-text">{{note.type | uppercase}} :</span>
+              <span> {{note.text}}</span>
+            </li>
+          </ul>
+
+        </span>
+      </div>
+    </div>
+    <hr class="dropdown-divider m-2" *ngIf="synonyms.length > 0">
+    <div class="row">
+      <h1>Theasarus</h1>
+      <div class="col-12" *ngIf="synonyms.length > 0">
+        <button class="btn btn-outline-success btn-rounded btn-sm waves-light text-center" type="button" (click)="syn1.toggle()"
+          (click)="show = !show">
+          Synonyms
+          <i class="fa ml-1" [ngClass]="show ? 'fa-minus' : 'fa-plus'" aria-hidden="true"></i>
+        </button>
+
+        <div class="card indigo z-depth-2" [mdbCollapse]="isCollapsed" #syn1="bs-collapse">
+          <div class="card-body">
+            <ul class="list-inline white-text mb-0">
+              <li class="list-inline-item" *ngFor="let syn of synonyms;let last=last"> {{syn}}{{last ? ' ' : ', '}}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <hr class="dropdown-divider m-2" *ngIf="antonyms.length > 0">
+      <div class="col-12" *ngIf="antonyms.length > 0">
+        <button class="btn btn-outline-danger btn-rounded btn-sm waves-light text-center" type="button" (click)="ant.toggle()"
+          (click)="show = !show">
+          Antonyms
+          <i class="fa ml-1" [ngClass]="show ? 'fa-minus' : 'fa-plus'" aria-hidden="true"></i>
+        </button>
+
+        <div class="card indigo z-depth-2" [mdbCollapse]="isCollapsed" #ant="bs-collapse">
+          <div class="card-body">
+            <ul class="list-inline white-text mb-0">
+              <li class="list-inline-item" *ngFor="let ant of antonyms;let last=last"> {{ant}}{{last ? ' ' : ', '}}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR|Noto+Serif+SC" rel="stylesheet">
+
+
+<div class="container">
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+  <a class="navbar-brand" routerLink="/">
+      <img src="../assets/iconshape.svg" width="20" height="20" alt="dict">
+      Dictionary</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active" routerLinkActive=" active">
+        <a class="nav-link" routerLink="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/about">About</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="container-fluid md-5 sm-5">
+    <router-outlet></router-outlet>
+  </div>
+<footer class="page-footer text-center font-italic">
+  <div class="footer-copyright py-3">Refer  
+      <a href="https://en.oxforddictionaries.com" target="_blank" rel="noopener">Oxford Dictionaries</a>
+    </div>
+  </footer> 
+</div>
